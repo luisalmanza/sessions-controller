@@ -53,11 +53,11 @@ async function userLogin(req: Request, res: Response): Promise<void> {
             },
             <string>process.env.JWT_SECRET,
             {
-                expiresIn: "2h"
+                expiresIn: "1h"
             }
         );
 
-        const data = { token, user };
+        const data = { token, user, expiresIn: 3600 };
         res.status(200);
         res.send({ data });
     } catch (error) {

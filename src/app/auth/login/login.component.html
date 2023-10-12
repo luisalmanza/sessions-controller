@@ -1,0 +1,18 @@
+<div class="card col-md-6 card p-5 row offset-md-3">
+    <h2 class="mb-5">Login</h2>
+    <form [formGroup]="authForm" (ngSubmit)="onLogin()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+
+        <div class="d-grid col-md-12 mx-auto mt-5">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</div>
