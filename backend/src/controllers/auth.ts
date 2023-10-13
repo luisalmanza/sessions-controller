@@ -20,7 +20,7 @@ async function registerUser(req: Request, res: Response): Promise<void> {
         res.send({ data });
     } catch (error) {
         res.status(500);
-        res.send({ error: "Error creating a user" })
+        res.send({ message: "Error creating a user" })
     }
 }
 
@@ -31,7 +31,7 @@ async function userLogin(req: Request, res: Response): Promise<void> {
 
         if (!user) {
             res.status(404);
-            res.send({ error: "User not exists" });
+            res.send({ message: "User not exists" });
             return;
         }
 
@@ -40,7 +40,7 @@ async function userLogin(req: Request, res: Response): Promise<void> {
 
         if (!check) {
             res.status(401);
-            res.send({ error: "Invalid password" });
+            res.send({ message: "Invalid password" });
             return;
         }
 
@@ -62,7 +62,7 @@ async function userLogin(req: Request, res: Response): Promise<void> {
         res.send({ data });
     } catch (error) {
         res.status(401);
-        res.send({ error: "Invalid authentication credentials" })
+        res.send({ message: "Invalid authentication credentials" })
     }
 }
 

@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { UserData } from './models/user-data.model';
 import { AuthDataResponse } from './models/auth-data-response.model';
 import { Router } from '@angular/router';
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 
 const BACKEND_URL = environment.apiUrl + "/auth";
 
@@ -16,12 +16,20 @@ export class AuthService {
   private authenticated: boolean = false;
   private token: string | undefined;
   private tokenTimer: any;
-  private authStatusListener = new Subject<boolean>();
+  authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
   isAuthenticated(): boolean {
     return this.authenticated;
+  }
+
+  setAuthenticated(authenticated: boolean): void {
+    this.authenticated = authenticated;
+  }
+
+  setToken(token: string): void {
+    this.token = token;
   }
 
   createUser(userData: UserData) {
@@ -32,39 +40,17 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  login(authData: AuthData) {
-    this.http.post<AuthDataResponse>(`${BACKEND_URL}/login`, authData).subscribe({
-      next: (authResponse: AuthDataResponse) => {
-        const data = { ...authResponse.data };
-        this.token = data.token;
-        if (this.token) {
-          const expiresInDuration = data.expiresIn;
-          this.setAuthTimer(expiresInDuration);
-          this.authenticated = true;
-          this.authStatusListener.next(true);
-          const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-          this.saveAuthData(this.token, expirationDate, data.user.role);
-          if (data.user.role === "admin") {
-            this.router.navigate(["/admin"]);
-          } else {
-            this.router.navigate(["/user"]);
-          }
-        }
-      },
-      error: error => {
-        this.authStatusListener.next(false);
-      }
-    })
+  login(authData: AuthData): Observable<AuthDataResponse> {
+    return this.http.post<AuthDataResponse>(`${BACKEND_URL}/login`, authData);
   }
 
-  private setAuthTimer(duration: number): void {
+  setAuthTimer(duration: number): void {
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, role: string): void {
+  saveAuthData(token: string, expirationDate: Date, role: string): void {
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
     localStorage.setItem("role", role);

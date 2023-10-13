@@ -3,26 +3,66 @@
     <form [formGroup]="userForm" (ngSubmit)="onSignup()">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" formControlName="name">
+            <input type="text" class="form-control" id="name" formControlName="name"
+                [ngClass]="{'is-invalid': name.invalid && name.touched}">
+            <div class="invalid-feedback">
+                Please enter your name.
+            </div>
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" formControlName="email">
+            <input type="email" class="form-control" id="email" formControlName="email"
+                [ngClass]="{'is-invalid': email.invalid && email.touched}">
+            <div class="invalid-feedback">
+                Please enter a valid email.
+            </div>
         </div>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="role" formControlName="role">
+            <label class="form-check-label" for="role">Admin role</label>
+        </div>
+
 
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
+            <input type="password" class="form-control" id="password" formControlName="password"
+                [ngClass]="{'is-invalid': password.invalid && password.touched}">
+            <div class="invalid-feedback">
+                Please enter a password.
+            </div>
         </div>
 
         <div class="mb-3">
             <label for="confirm-password" class="form-label">Confirm password</label>
-            <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword">
+            <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword"
+                [ngClass]="{'is-invalid': confirmPassword.invalid && confirmPassword.touched}">
+            <div class="invalid-feedback">
+                Please enter the same password as above.
+            </div>
         </div>
 
         <div class="d-grid col-md-12 mx-auto mt-5">
             <button type="submit" class="btn btn-primary">Sign Up</button>
         </div>
     </form>
+</div>
+
+<!-- Registered Modal -->
+<div class="modal" id="registeredModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hello!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You have been successfully registered.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="onLogin()">Login</button>
+            </div>
+        </div>
+    </div>
 </div>

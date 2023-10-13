@@ -2,16 +2,17 @@ import { NextFunction, Request, Response } from "express";
 import { check, validationResult } from "express-validator";
 
 const validatorRegister = [
-    check("name").exists().notEmpty().isLength({ min: 2 }),
-    check("password").exists().notEmpty().isLength({ min: 6 }),
+    check("name").exists().notEmpty(),
+    check("password").exists().notEmpty(),
     check("email").exists().notEmpty().isEmail(),
+    check("role").exists().notEmpty(),
     (req: Request, res: Response, next: NextFunction) => {
         return validateResults(req, res, next);
     }
 ];
 
 const validatorLogin = [
-    check("password").exists().notEmpty().isLength({ min: 6 }),
+    check("password").exists().notEmpty(),
     check("email").exists().notEmpty().isEmail(),
     (req: Request, res: Response, next: NextFunction) => {
         return validateResults(req, res, next);

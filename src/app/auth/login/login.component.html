@@ -3,13 +3,23 @@
     <form [formGroup]="authForm" (ngSubmit)="onLogin()">
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" formControlName="email">
+            <input type="email" class="form-control" id="email" formControlName="email"
+                [ngClass]="{'is-invalid': email.invalid && email.touched}">
+            <div class="invalid-feedback">
+                Please enter a valid email.
+            </div>
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
+            <input type="password" class="form-control" id="password" formControlName="password"
+                [ngClass]="{'is-invalid': password.invalid && password.touched}">
+            <div class="invalid-feedback">
+                Please enter your password.
+            </div>
         </div>
+
+        <span class="mb-3 text-danger">{{loginError}}</span>
 
         <div class="d-grid col-md-12 mx-auto mt-5">
             <button type="submit" class="btn btn-primary">Login</button>
