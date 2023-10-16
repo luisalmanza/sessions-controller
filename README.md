@@ -1,27 +1,26 @@
-# SessionsController
+# Sessions Controller
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+This is a basic login project where you can manage sessions and access permissions
 
-## Development server
+## Frontend Technologies
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Angular 16, TypeScript, HTML, SCSS, and Bootstrap.
 
-## Code scaffolding
+## Backend Technologies
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Node.js, MongoDB, Express and TypeScript.
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Create the file `.env` on `backend` folder, include the content same as `.env.example` and add your own URIs from MongoDB.
 
-## Running unit tests
+2. Run `npm install` on root and `backend` folder.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Backend development server
 
-## Running end-to-end tests
+Run `npm run dev` on `backend` folder for a dev server.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Frontend development server
 
-## Further help
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
